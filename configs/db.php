@@ -1,7 +1,7 @@
 <?php
 $config= [
     'master'=>[
-                'type'      =>  'pdo',
+                'type'      =>  'mysql',
                 'hostname'  =>  'localhost',
                 'username'  =>  'root',
                 'password'  =>  'liufeng',

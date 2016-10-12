@@ -2,8 +2,10 @@
 /**
  * 文件名：index.php
  */
+use vendor\core\Register;
 header("Content-type:text/html;charset=utf-8");
 define('APP',__DIR__);
 include "vendor/include.php";
-$db=\vendor\core\Factory::getDb();
-dd($db);
+
+$model=new \vendor\base\Model();
+dd($model->all());
