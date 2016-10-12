@@ -27,20 +27,27 @@ class PDO implements DB
 
     function connect($configs = array())
     {
-        $conn=new \mysqli($configs['hostname'],$configs['username'],$configs['password'],$configs['dbName']);
-        if($conn->connect_error)
-            die($conn->connect_error);
+        $dsn = "mysql:dbname={$configs['dbName']};host={$configs['hostname']}";
+        dd($dsn);
+        try {
+            $conn=new \PDO($dsn,$configs['username'],$configs['password']);
+        } catch (\PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+            die;
+        }
+
+            dd("ok pdo");
         return $conn;
     }
 
     function close()
     {
-        $this->conn->close();
+        $this->conn=null;
     }
 
     function query($sql)
     {
-        return $this->conn->query($sql);
+        return $this->conn->exec($sql);
     }
 
 }

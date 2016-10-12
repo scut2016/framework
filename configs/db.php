@@ -1,12 +1,13 @@
 <?php
 $config= [
     'master'=>[
-                'type'      =>  'mysql',
+                'type'      =>  'pdo',
                 'hostname'  =>  'localhost',
                 'username'  =>  'root',
                 'password'  =>  'liufeng',
                 'dbName'    =>  'train',
                 'charset'   =>  'utf8',
+                'params'    =>array(),
               ],
     'slave'=>[
                 'obx'=>
@@ -17,6 +18,7 @@ $config= [
                     'password'  =>  '',
                     'dbName'    =>  'train',
                     'charset'   =>  'utf8',
+                    'params'    =>array(),
                 ],
              'ttc'=>
                 [
@@ -26,6 +28,7 @@ $config= [
                     'password'  =>  '',
                     'dbName'    =>  'train',
                     'charset'   =>  'utf8',
+                    'params'    =>array(),
                 ],
             ],
 ];
