@@ -9,6 +9,7 @@ namespace vendor\base;
 
 use vendor\core\Factory;
 use vendor\core\Iterator;
+use vendor\core\Proxy;
 use vendor\core\Register;
 
 class Model
@@ -18,7 +19,7 @@ class Model
     protected $db=null;
     function __construct()
     {
-        $this->db=Factory::getDb();
+//        $this->db=Factory::getDb();
     }
     public function getModelName()
     {
@@ -41,10 +42,11 @@ class Model
         }
     }
 
-
     function all($type=1)
     {
         $table=$this->getTableName();
+        $this->db=Proxy::readDb();
+        dd($this->db);
         $sql="select * from $table";
         switch ($type)
         {
@@ -60,17 +62,20 @@ class Model
                 break;
         }
     }
+    function update($id)
+    {
+        $this->db=Proxy::writeDb();
+        $sql="update student set stu_name='王语嫣' where id=$id";
+        dd($this->db);
+        $this->exeDml($sql);
+    }
     function one($id=1)
     {
         $table=$this->getTableName();
         if(Register::get($table))
-        {
             $all=Register::get($table);
-        }
         else
-        {
             $all=$this->all();
-        }
         while($all->valid())
         {
             if($all->key()==$id-1)

@@ -6,8 +6,6 @@
  */
 
 namespace backend\models;
-
-
 use vendor\base\Model;
 
 class StudentDetailModel extends Model

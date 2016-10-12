@@ -14,7 +14,15 @@ class Factory
     static function getDb($type='master')
     {
         $configs=new \vendor\core\Config(APP.'/configs');
-        $config=$configs['db'][$type];
+        if($type=='master')
+        {
+            $config=$configs['db'][$type];
+        }
+        else
+        {
+            $slaves=$configs['db']['slave'];
+            $config=$slaves[array_rand($slaves)];
+        }
         $connType=$config['type'];
         $db=null;
         switch ($connType)
@@ -26,7 +34,7 @@ class Factory
                 $db=PDO::getInstance($config);
                 break;
         }
-        Register::set($connType,$db);
+        Register::set($type,$db);
         return $db;
     }
 
