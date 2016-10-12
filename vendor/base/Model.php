@@ -65,7 +65,7 @@ class Model
     function update($id)
     {
         $this->db=Proxy::writeDb();
-        $sql="update student set stu_name='王语嫣' where id=$id";
+        $sql="update student set stu_name='赵敏' where id=$id";
         dd($this->db);
         $this->exeDml($sql);
     }
@@ -87,14 +87,13 @@ class Model
     
     private function exeDql($sql)
     {
-        $res=$this->db->query($sql) or die ("执行 $sql 错误".$this->db->error);
+        $res=$this->db->query($sql) ;
         return $res;
     }
-    private  function exeDml($sql)
+
+    private function exeDml($sql)
     {
-        $res=$this->db->query($sql) or die ($this->db->error);
-        $num=$this->db->affected_rows;
-        return $num;
+        return $this->db->exeDml($sql);
     }
     private  function getAssoc($sql)
     {

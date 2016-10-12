@@ -28,6 +28,7 @@ class Factory
         switch ($connType)
         {
             case 'mysql':
+                MySQLi::reset();
                 $db=MySQLi::getInstance($config);
                 break;
             case 'pdo':

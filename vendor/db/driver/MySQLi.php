@@ -35,14 +35,27 @@ class MySQLi implements DB
 
     function close()
     {
-        $this->conn->close();
+       
     }
-
+    
+    static function reset()
+    {
+        self::$instance=null;
+    }
     function query($sql)
     {
-        return $this->conn->query($sql);
+        return $this->conn->query($sql) ;
     }
 
-
+     function exeDml($sql)
+    {
+        $res=$this->conn->query($sql) or die ($this->conn->error);
+        $num=$this->conn->affected_rows;
+        return $num;
+    }
+    function __destruct()
+    {
+        $this->conn->close();
+    }
 
 }
