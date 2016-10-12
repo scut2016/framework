@@ -16,5 +16,5 @@ include "vendor/include.php";
 ////$all->next();
 ////$all->next();
 //dd($model->one(3));
-$stu=new \backend\models\StudentModel();
+$stu=new \backend\models\StudentDetailModel();
 dd($stu->one(5));

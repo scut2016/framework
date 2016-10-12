@@ -10,7 +10,7 @@ namespace backend\models;
 
 use vendor\base\Model;
 
-class Student_detailModel extends Model
+class StudentDetailModel extends Model
 {
 
 }

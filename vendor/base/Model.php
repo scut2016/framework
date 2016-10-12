@@ -37,7 +37,7 @@ class Model
         }
         else
         {
-            return $this->getModelName();
+            return  strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '_', $this->getModelName()));
         }
     }
 
