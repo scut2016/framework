@@ -8,29 +8,77 @@
 namespace vendor\base;
 
 use vendor\core\Factory;
+use vendor\core\Iterator;
+use vendor\core\Register;
 
 class Model
 {
+    protected $tableName='';   //数据表名，不包含前缀
+    protected $trueTableName='';//数据表名，包含前缀
     protected $db=null;
     function __construct()
     {
         $this->db=Factory::getDb();
     }
-
-    function all($type=1)
+    public function getModelName()
     {
-        $sql='select * from student';
-        switch ($type)
+        $class=get_class($this);
+        $len=strlen($class);
+        $class=substr($class,0,$len-5);
+        $pos=strrpos($class,'\\');
+        $class=substr($class,$pos+1);
+        return $class;
+    }
+    private function getTableName()
+    {
+        if($this->trueTableName)
         {
-            case 1:
-                return $this->getAssoc($sql);
-                break;
-            default:
-                return $this->getRow($sql);
-                break;
+            return $this->trueTableName;
+        }
+        else
+        {
+            return $this->getModelName();
         }
     }
 
+
+    function all($type=1)
+    {
+        $table=$this->getTableName();
+        $sql="select * from $table";
+        switch ($type)
+        {
+            case 1:
+                $iterator= new Iterator($this->getAssoc($sql));
+                Register::set('student',$iterator);
+                return $iterator;
+                break;
+            default:
+                $iterator= new Iterator($this->getRow($sql));
+                Register::set('student',$iterator);
+                return $iterator;
+                break;
+        }
+    }
+    function one($id=1)
+    {
+        if(Register::get('student'))
+        {
+            $all=Register::get('student');
+        }
+        else
+        {
+            $all=$this->all();
+        }
+        while($all->valid())
+        {
+            if($all->key()==$id-1)
+                break;
+            $all->next();
+        }
+        return $all->current();
+    }
+    
     private function exeDql($sql)
     {
         $res=$this->db->query($sql) or die ("执行 $sql 错误".$this->db->error);
