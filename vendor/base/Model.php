@@ -50,21 +50,22 @@ class Model
         {
             case 1:
                 $iterator= new Iterator($this->getAssoc($sql));
-                Register::set('student',$iterator);
+                Register::set($table,$iterator);
                 return $iterator;
                 break;
             default:
                 $iterator= new Iterator($this->getRow($sql));
-                Register::set('student',$iterator);
+                Register::set($table,$iterator);
                 return $iterator;
                 break;
         }
     }
     function one($id=1)
     {
-        if(Register::get('student'))
+        $table=$this->getTableName();
+        if(Register::get($table))
         {
-            $all=Register::get('student');
+            $all=Register::get($table);
         }
         else
         {

@@ -26,6 +26,7 @@ class Factory
                 $db=PDO::getInstance($config);
                 break;
         }
+        Register::set($connType,$db);
         return $db;
     }
 
