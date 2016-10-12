@@ -7,7 +7,6 @@
 
 namespace vendor\db\driver;
 use vendor\db\DB;
-
 class MySQLi implements DB
 {
     private static $instance=null;
@@ -30,6 +29,8 @@ class MySQLi implements DB
         $conn=new \mysqli($configs['hostname'],$configs['username'],$configs['password'],$configs['dbName']);
         if($conn->connect_error)
             die($conn->connect_error);
+        else
+            $conn->set_charset($configs['charset']);
         return $conn;
     }
 

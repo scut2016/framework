@@ -17,5 +17,11 @@ include "vendor/include.php";
 ////$all->next();
 //dd($model->one(3));
 $stu=new \backend\models\StudentModel();
-dd($stu->one(2));
-$stu->update(2);
+$arr=$stu->getFields();
+dd($arr);
+extract($arr);
+dd(get_defined_vars());
+//dd($stu->all());
+//dd($stu->update(2));
+
+

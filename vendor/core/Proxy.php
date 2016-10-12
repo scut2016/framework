@@ -9,20 +9,17 @@ namespace vendor\core;
 
 class Proxy
 {
-   static function  writeDb()
+    function __construct()
     {
-        if(!Register::get('master'))
-             $db=Factory::getDb();
-        else
-            $db=Register::get('master');
-        return $db;
+       
+    }
+
+    static function  writeDb()
+    {
+       return Register::get('master');
     }
     static function readDb()
     {
-        if(!Register::get('slave'))
-            $db=Factory::getDb('slave');
-        else
-            $db=Register::get('slave');
-        return $db;
+       return  Register::get('slave');
     }
 }

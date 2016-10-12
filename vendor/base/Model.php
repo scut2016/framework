@@ -19,7 +19,8 @@ class Model
     protected $db=null;
     function __construct()
     {
-//        $this->db=Factory::getDb();
+        Register::set('master',Factory::getDb('master'));//获取主库
+        Register::set('slave',Factory::getDb('slave'));//获取从库
     }
     public function getModelName()
     {
@@ -45,7 +46,6 @@ class Model
     function all($type=1)
     {
         $table=$this->getTableName();
-        $this->db=Proxy::readDb();
         $sql="select * from $table";
         switch ($type)
         {
@@ -61,11 +61,10 @@ class Model
                 break;
         }
     }
-    function update($id)
+    function update($where)
     {
-        $this->db=Proxy::writeDb();
-        $sql="update student set stu_name='赵敏' where id=$id";
-        $this->exeDml($sql);
+        
+       
     }
     function one($id=1)
     {
@@ -85,13 +84,15 @@ class Model
     
     private function exeDql($sql)
     {
-        $res=$this->db->query($sql) ;
+        $db=Proxy::readDb();
+        $res=$db->query($sql) ;
         return $res;
     }
 
     private function exeDml($sql)
     {
-        return $this->db->exeDml($sql);
+        $db=Proxy::writeDb();
+        return $db->exeDml($sql);
     }
     private  function getAssoc($sql)
     {
@@ -115,4 +116,20 @@ class Model
         $res->free();
         return $arr;
     }
+//获取所有字段
+    public function getFields()
+    {
+        $table=$this->getTableName();
+        $dbName='train';
+        $sql="SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE table_name = '$table' AND table_schema = '$dbName'";
+        $arr=$this->getRow($sql);
+        $fieldsArr=array();
+        foreach ($arr as $key => $value) {
+            $fieldsArr[]=$value[0];
+        }
+        return array_flip($fieldsArr);
+    }
+
+
+
 }
