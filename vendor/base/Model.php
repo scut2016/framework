@@ -46,7 +46,6 @@ class Model
     {
         $table=$this->getTableName();
         $this->db=Proxy::readDb();
-        dd($this->db);
         $sql="select * from $table";
         switch ($type)
         {
@@ -66,7 +65,6 @@ class Model
     {
         $this->db=Proxy::writeDb();
         $sql="update student set stu_name='赵敏' where id=$id";
-        dd($this->db);
         $this->exeDml($sql);
     }
     function one($id=1)
