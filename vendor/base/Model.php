@@ -380,15 +380,24 @@ class Model
     public function set()
     {
         $sql=$this->sql.$this->where.$this->group.$this->having.$this->order.$this->limit;
+        $this->clear();
         return $this->exeDml($sql);
+    }
+    private function clear()
+    {
+        $this->select=null;
+        $this->where=null;
+        $this->group=null;
+        $this->having=null;
+        $this->order=null;
+        $this->limit=null;
     }
     public function get()
     {
         $table=$this->getTableName();
         $this->addSpecialChar($table);
         $sql='SELECT '.$this->select.' FROM '.$table.$this->where.$this->group.$this->having.$this->order.$this->limit;
-        $this->pageSql=$sql;
-        dd($sql);
+        $this->clear();
         return $this->getAssoc($sql);
     }
     private function valueProcess($valuesArr)

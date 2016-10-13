@@ -17,7 +17,7 @@ include "vendor/include.php";
 ////$all->next();
 //dd($model->one(3));
 $stu=new \backend\models\StudentModel();
-//dd($stu->select('id,stu_name')->where('id<5')->get());
+dd($stu->select('id,stu_name')->where('id<5')->get());
 //dd($arr);
 //$arr=$stu->getFields();
 //dd($arr);
@@ -31,7 +31,7 @@ $stu=new \backend\models\StudentModel();
 //$stu->save();
 //$stu->one(3);
 //echo $stu->stu_name;
-$arr=['stu_id'=>'201655','stu_name'=>'胡一刀','class_id'=>3];
+$arr=['stu_id'=>'201656','stu_name'=>'苗人凤','class_id'=>'03'];
 $stu->add($arr)->set();
 
 
