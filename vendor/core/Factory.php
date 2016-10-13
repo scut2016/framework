@@ -23,6 +23,7 @@ class Factory
             $slaves=$configs['db']['slave'];
             $config=$slaves[array_rand($slaves)];
         }
+        Register::set('dbConfig',$config);
         $connType=$config['type'];
         $db=null;
         switch ($connType)
@@ -37,6 +38,12 @@ class Factory
         }
         Register::set($type,$db);
         return $db;
+    }
+    static function createModel($model)
+    {
+        $m=new $model();
+        Register::set($model,$m);
+        return $m;
     }
 
 }
