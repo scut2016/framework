@@ -31,8 +31,9 @@ dd($stu->select('id,stu_name')->where('id<5')->get());
 //$stu->save();
 //$stu->one(3);
 //echo $stu->stu_name;
-$arr=['stu_id'=>'201656','stu_name'=>'苗人凤','class_id'=>'03'];
-$stu->add($arr)->set();
+//$arr=['stu_id'=>'201656','stu_name'=>'苗人凤','class_id'=>'03'];
+//$stu->add($arr)->set();
+$stu->delete([25,26]);
 
 
 

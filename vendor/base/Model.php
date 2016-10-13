@@ -400,6 +400,20 @@ class Model
         $this->clear();
         return $this->getAssoc($sql);
     }
+    public function delete($condition)
+    {
+        if(is_array($condition))
+        {
+            $co=implode(',',$condition);
+        }
+        else
+            $co=$condition;
+        $table=$this->getTableName();
+        $sql="delete from $table where {$this->pk} in ($co)";
+//        dd($sql);
+//        die;
+       return $this->exeDml($sql);
+    }
     private function valueProcess($valuesArr)
     {
         foreach ($valuesArr as $key => $value) {
