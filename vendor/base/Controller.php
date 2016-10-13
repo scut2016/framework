@@ -32,7 +32,7 @@ class Controller
     {
         foreach ($this->observers as $observer)
         {
-            $observer->update($this->rulers);
+            $observer->update($this->model,$this->rulers);
         }
     }
     
@@ -41,13 +41,13 @@ class Controller
         $this->addDecorator(new RedDecorator());
         if(isset($this->rulers))
             $this->addObserver(new ValidateObserver());
-        $this->notify();
         $modelName=$this->getModelName();
         if(!Register::get($modelName))
             $model=Factory::createModel($modelName);
         else
             $model=Register::get($modelName);
-     return  $this->model=$model;
+         $this->model=$model;
+         $this->notify();
     }
 
     private function getModelName()

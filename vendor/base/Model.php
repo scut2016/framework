@@ -397,6 +397,7 @@ class Model
         $table=$this->getTableName();
         $this->addSpecialChar($table);
         $sql='SELECT '.$this->select.' FROM '.$table.$this->where.$this->group.$this->having.$this->order.$this->limit;
+       dd($sql);
         $this->clear();
         return $this->getAssoc($sql);
     }
