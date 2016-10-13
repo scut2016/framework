@@ -7,13 +7,24 @@
 
 namespace vendor\base;
 use vendor\core\Factory;
+use vendor\core\RedDecorator;
 use vendor\core\Register;
+use vendor\core\Decorator;
 
 class Controller
 {
     protected $model=null;
+    protected $rulers=[];
+    protected $decorators=[];
+    
+    function addDecorator(Decorator $decorator)
+    {
+        $this->decorators[]=$decorator;
+    }
+    
     function __construct()
     {
+        $this->addDecorator(new RedDecorator());
         $modelName=$this->getModelName();
         if(!Register::get($modelName))
             $model=Factory::createModel($modelName);
@@ -29,5 +40,7 @@ class Controller
         $model='\\'.str_replace('Controller','Model',$model);
         return $model;
     }
+    
+    
     
 }

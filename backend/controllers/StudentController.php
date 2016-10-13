@@ -10,11 +10,27 @@ use vendor\base\Controller;
 
 class StudentController extends Controller
 {
-    
+
+    function __construct()
+    {
+        parent::__construct();
+
+    }
+
     function index()
     {
-       dd($this->model->all()->current());
+        $d=$this->decorators[0];
+        $d->before();
+//       dd($this->model->all()->current());
+
+        echo "Hello world!";
+        $d->after();
     }
-    
-    
+    function __destruct()
+    {
+
+
+    }
+
+
 }
