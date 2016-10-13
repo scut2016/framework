@@ -10,21 +10,23 @@ use vendor\base\Controller;
 
 class StudentController extends Controller
 {
-
+ 
     function __construct()
     {
+        $this->rulers['username']=empty($_GET['user'])?'guest':$_GET['user'];
         parent::__construct();
 
     }
 
     function index()
     {
-        $d=$this->decorators[0];
-        $d->before();
-//       dd($this->model->all()->current());
+//        $d=$this->decorators[0];
+//        $d->before();
+////       dd($this->model->all()->current());
+//
+//        echo "Hello world!";
+//        $d->after();
 
-        echo "Hello world!";
-        $d->after();
     }
     function __destruct()
     {
