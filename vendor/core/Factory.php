@@ -39,5 +39,11 @@ class Factory
         Register::set($type,$db);
         return $db;
     }
+    static function createModel($model)
+    {
+        $m=new $model();
+        Register::set($model,$m);
+        return $m;
+    }
 
 }
