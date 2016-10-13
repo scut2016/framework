@@ -16,8 +16,8 @@ include "vendor/include.php";
 ////$all->next();
 ////$all->next();
 //dd($model->one(3));
-$stu=new \backend\models\StudentModel();
-dd($stu->select('id,stu_name')->where('id<5')->get());
+//$stu=new \backend\models\StudentModel();
+//dd($stu->select('id,stu_name')->where('id<5')->get());
 //dd($arr);
 //$arr=$stu->getFields();
 //dd($arr);
@@ -33,7 +33,9 @@ dd($stu->select('id,stu_name')->where('id<5')->get());
 //echo $stu->stu_name;
 //$arr=['stu_id'=>'201656','stu_name'=>'苗人凤','class_id'=>'03'];
 //$stu->add($arr)->set();
-$stu->delete([25,26]);
+//$stu->delete([25,26]);
+$s=new \backend\controllers\StudentController();
+$s->index();
 
 
 
