@@ -17,11 +17,12 @@ include "vendor/include.php";
 ////$all->next();
 //dd($model->one(3));
 $stu=new \backend\models\StudentModel();
-$arr=$stu->getFields();
-dd($arr);
-extract($arr);
-dd(get_defined_vars());
+//$arr=$stu->getFields();
+//dd($arr);
+//extract($arr);
+//dd(get_defined_vars());
 //dd($stu->all());
 //dd($stu->update(2));
-
+$a=new \vendor\core\ActiveRecord('student');
+$a->stu_name='lisi';
 
