@@ -18,10 +18,16 @@ include "vendor/include.php";
 //dd($model->one(3));
 $stu=new \backend\models\StudentModel();
 $arr=$stu->getFields();
-dd($arr);
-extract($arr);
-dd(get_defined_vars());
+//dd($arr);
+//extract($arr);
+//dd(get_defined_vars());
+
 //dd($stu->all());
-//dd($stu->update(2));
+//$stu->update();
+$stu->one(2);
+$stu->stu_name="赵敏";
+$stu->one(3);
+echo $stu->stu_name;
+
 
 
