@@ -10,24 +10,25 @@ use vendor\base\Controller;
 
 class StudentController extends Controller
 {
- 
-    function __construct()
-    {
-        $this->rulers['username']=empty($_GET['user'])?'guest':$_GET['user'];
-        parent::__construct();
-
-    }
 
     function index()
     {
-//        $d=$this->decorators[0];
-//        $d->before();
-////       dd($this->model->all()->current());
-//
-//        echo "Hello world!";
-//        $d->after();
+//        $arr=$this->model->all()->current();
+//        $this->display($arr);
 
     }
+    function rulers()
+    {
+      return  [
+                ['stu_id', 'required'],
+                ['stu_id', 'unique',  'message' => 'stu_id已经存在'],
+                ['stu_name', 'string', 'min' => 2, 'max' => 4,'message' => 'stu_name必须是合法的字符串，长度为2-4'],
+                ['stu_name', 'required',],
+      
+      ];
+
+    }
+
     function __destruct()
     {
 

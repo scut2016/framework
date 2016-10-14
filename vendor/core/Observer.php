@@ -9,5 +9,5 @@ namespace vendor\core;
 
 interface Observer
 {
-    function update($rulers=array());
+    function update($model,$rulers=array());
 }

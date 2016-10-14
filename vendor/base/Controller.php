@@ -16,7 +16,6 @@ use vendor\core\ValidateObserver;
 class Controller
 {
     protected $model=null;
-    protected $rulers=[];
     protected $decorators=[];
     protected $observers=[];
     
@@ -32,24 +31,37 @@ class Controller
     {
         foreach ($this->observers as $observer)
         {
-            $observer->update($this->rulers);
+            $observer->update($this->model,$this->rulers());
         }
     }
-    
+    function display($var)
+    {
+        $b=$this->decorators[0];
+        $b->before();
+        dd($var);
+        $b->after();
+    }
     function __construct()
     {
         $this->addDecorator(new RedDecorator());
-        if(isset($this->rulers))
-            $this->addObserver(new ValidateObserver());
-        $this->notify();
+       
         $modelName=$this->getModelName();
         if(!Register::get($modelName))
             $model=Factory::createModel($modelName);
         else
             $model=Register::get($modelName);
-     return  $this->model=$model;
+        $this->model=$model;
+        if(!empty($this->rulers()))
+        {
+            $this->addObserver(new ValidateObserver());
+            $this->notify();
+        }
     }
 
+    protected function rulers()
+    {
+        return [];
+    }
     private function getModelName()
     {
         $class=get_class($this);

@@ -13,7 +13,7 @@ $config= [
                 'ttc'=>
                 [
                     'type'      =>  'mysql',
-                    'hostname'  =>  '192.168.1.52',
+                    'hostname'  =>  '192.168.1.43',
                     'username'  =>  'guest',
                     'password'  =>  '',
                     'dbName'    =>  'train',
@@ -23,7 +23,7 @@ $config= [
              'tzy'=>
                 [
                     'type'      =>  'mysql',
-                    'hostname'  =>  '192.168.1.52',
+                    'hostname'  =>  '192.168.1.43',
                     'username'  =>  'guest',
                     'password'  =>  '',
                     'dbName'    =>  'train',
