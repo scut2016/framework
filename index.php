@@ -17,13 +17,10 @@ include "vendor/include.php";
 ////$all->next();
 //dd($model->one(3));
 //$stu=new \backend\models\StudentModel();
-//dd($stu->select('id,stu_name')->where('id<5')->get());
-//dd($arr);
 //$arr=$stu->getFields();
 //dd($arr);
 //extract($arr);
 //dd(get_defined_vars());
-
 //dd($stu->all());
 //$stu->update();
 //$stu->one(2);
